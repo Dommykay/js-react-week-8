@@ -41,3 +41,20 @@ app.get("/api/albums/:id", (req, res) => {
 
   res.json(album);
 });
+
+// ----------------------------------------------------
+// 3. GET /api/albums/:id/year
+// Return one album title and year
+// ---------------------------------------------------
+
+app.get("/api/albums/:id/year", (req, res) => {
+  const album = albums.find((a) => a.id == req.params.id);
+
+  if (!albums) {
+    return res.status(404).json({ error: "Album not found" });
+  }
+  res.json({
+    title: album.title,
+    year: album.year,
+  });
+});
