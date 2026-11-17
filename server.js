@@ -58,3 +58,19 @@ app.get("/api/albums/:id/year", (req, res) => {
     year: album.year,
   });
 });
+
+// ----------------------------------------------------
+// 4. GET /api/albums/artist/:name
+// Return albums made by an artist
+// ---------------------------------------------------
+
+app.get("/api/albums/artist/:name", (req, res) => {
+  const results = albums.filter(
+    (a) => a.artist.toLowerCase() === req.params.name,
+  );
+
+  if (!albums) {
+    return res.status(404).json({ error: "Album not found" });
+  }
+  res.json(results);
+});
