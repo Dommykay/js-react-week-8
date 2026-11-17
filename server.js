@@ -26,3 +26,18 @@ app.get("/api/albums", (req, res) => {
   // req = what they requested, res = what youre responding to them with
   res.json(albums); // res.json(your response) gives it to them as a json object
 });
+
+// ----------------------------------------------------
+// 2. GET /api/albums/:id
+// Return one album by ID
+// ---------------------------------------------------
+
+app.get("/api/albums/:id", (req, res) => {
+  const album = albums.find((a) => a.id == req.params.id);
+
+  if (!album) {
+    return res.status(404).json({ error: "Album not found" });
+  }
+
+  res.json(album);
+});
